@@ -8,4 +8,5 @@
     <string name="add_btn">Add/Update</string>
     <string name="task_name">Task Name</string>
     <string name="task_date">Task Date</string>
+    <string name="dupilicate_task_warning">Task name already exist</string>
 </resources>

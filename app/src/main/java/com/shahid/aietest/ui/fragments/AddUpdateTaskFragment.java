@@ -2,6 +2,8 @@ package com.shahid.aietest.ui.fragments;
 
 import android.app.DatePickerDialog;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -9,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -24,6 +27,7 @@ import com.shahid.aietest.viewmodels.AddUpdateTaskViewModel;
 import com.shahid.aietest.viewmodels.ViewModelFactory;
 
 import java.util.Calendar;
+import java.util.List;
 
 
 public class AddUpdateTaskFragment extends Fragment {
@@ -118,12 +122,65 @@ public class AddUpdateTaskFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                Calendar selectedCalendar=mViewModel.getCurrentCalendar();
+                Calendar selectedCalendar=new DateUtills().getCalendar();
                 DatePickerDialog datePickerDialog=new DatePickerDialog(getActivity(), dateListener, selectedCalendar
                         .get(Calendar.YEAR), selectedCalendar.get(Calendar.MONTH),
                         selectedCalendar.get(Calendar.DAY_OF_MONTH));
-                datePickerDialog.getDatePicker().setMinDate(mViewModel.getCurrentCalendar().getTimeInMillis());
+                datePickerDialog.getDatePicker().setMinDate(new DateUtills().getCalendar().getTimeInMillis());
                 datePickerDialog.show();
+            }
+        });
+
+
+
+
+        //keep listing change in edittext text and check in db for any existing record
+        taskNameET.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+                mViewModel.searchFor(s.toString()).observe(getViewLifecycleOwner(), new Observer<List<AIETask>>() {
+                    @Override
+                    public void onChanged(List<AIETask> aieTasks) {
+
+                        if(aieTasks != null && aieTasks.size() > 0)
+                        {
+                          for(AIETask aieTask:aieTasks)
+                          {
+                              //is its current task under edit , let it edit
+                              if(mViewModel.isThisCurrentTask(aieTask))
+                              {
+                                  addUpdateTaskButton.setEnabled(true);
+                                  addUpdateTaskButton.setClickable(true);
+                              }
+                              else //else show message and disbale submit button
+                              {
+                                  Toast.makeText(getActivity(),getString(R.string.dupilicate_task_warning),Toast.LENGTH_LONG).show();
+                                  addUpdateTaskButton.setEnabled(false);
+                                  addUpdateTaskButton.setClickable(false);
+                              }
+
+                          }
+                        }
+                        else
+                        {
+                            addUpdateTaskButton.setEnabled(true);
+                            addUpdateTaskButton.setClickable(true);
+                        }
+                    }
+                });
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start,
+                                          int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start,
+                                      int before, int count) {
+
             }
         });
     }

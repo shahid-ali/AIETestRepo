@@ -10,6 +10,7 @@ import com.shahid.aietest.utills.DateUtills;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 public class AddUpdateTaskViewModel extends AndroidViewModel {
 
@@ -102,6 +103,24 @@ public class AddUpdateTaskViewModel extends AndroidViewModel {
         {
             Date date =  selectedCalendar.getTime();
             return new DateUtills().getDateFormat(date);
+        }
+    }
+
+    //search for existing task name to prevent duplicate task name
+    public LiveData<List<AIETask>>  searchFor(String searchFor)
+    {
+        return mRepository.searchFor(searchFor);
+    }
+
+    public boolean isThisCurrentTask(AIETask aieTask)
+    {
+        if(rowId==aieTask.rowid)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
 

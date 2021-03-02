@@ -51,4 +51,10 @@ public class TasksRepository {
             taskDOA.insert(aieTask);
         });
     }
+
+    //search for existing task name to prevent duplicate task name
+    public LiveData<List<AIETask>> searchFor(String searchFor)
+    {
+        return taskDOA.searchFor(searchFor);
+    }
 }

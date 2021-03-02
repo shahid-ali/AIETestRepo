@@ -24,4 +24,8 @@ public interface TaskDOA {
 
     @Query("SELECT rowid,task_name,user_name,dateCreated,taskDate FROM task WHERE rowid= :rowid")
     LiveData<AIETask> getTask(int rowid);
+
+
+    @Query("SELECT rowid,task_name,user_name,dateCreated,taskDate FROM task WHERE task_name  MATCH :searchFor")
+    LiveData<List<AIETask>> searchFor(String searchFor);
 }
