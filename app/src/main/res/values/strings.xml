@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">AIETest</string>
+
+    <!--AddUpdateActivity-->
+    <string name="row_id">row_id</string>
+
+<!--     AddUpdateTaskFragment-->
+    <string name="add_btn">Add/Update</string>
+    <string name="task_name">Task Name</string>
+    <string name="task_date">Task Date</string>
+</resources>

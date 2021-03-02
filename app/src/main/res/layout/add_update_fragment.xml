@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/add_update_task"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="@dimen/common_horizontal_margin"
+    tools:context="com.shahid.aietest.ui.fragments.AddUpdateTaskFragment">
+
+    <EditText
+        android:id="@+id/task_name_et"
+        android:inputType="textMultiLine"
+    android:lines="8"
+    android:minLines="6"
+    android:gravity="top|start"
+    android:maxLines="10"
+    android:layout_height="0dp"
+    android:layout_width="match_parent"
+    android:scrollbars="vertical"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    android:hint="@string/task_name"
+    />
+
+    <EditText
+        android:id="@+id/task_date_et"
+        android:minLines="1"
+        android:gravity="top|start"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        app:layout_constraintTop_toBottomOf="@id/task_name_et"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:hint="@string/task_date"
+        android:clickable="true"
+        android:focusable="false"
+        android:inputType="date"
+        android:layout_marginTop="@dimen/common_vertical_margin"
+
+        />
+
+
+    <Button
+        android:id="@+id/add_task_button"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        app:layout_constraintTop_toBottomOf="@+id/task_date_et"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="@string/add_btn"
+        android:layout_marginTop="@dimen/common_vertical_margin"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
