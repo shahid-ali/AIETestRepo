@@ -9,4 +9,10 @@
     <string name="task_name">Task Name</string>
     <string name="task_date">Task Date</string>
     <string name="dupilicate_task_warning">Task name already exist</string>
+
+<!--    ConnectivityService-->
+    <string name="connectivity_tag">Connectivity</string>
+    <string name="no_network_availability">No Internet connection</string>
+    <string name="network_availability">Internet connection available</string>
+
 </resources>

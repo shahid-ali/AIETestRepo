@@ -1,4 +1,4 @@
-package com.shahid.aietest.ui.adapters;
+package com.shahid.aietest.ui.tasks;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.shahid.aietest.R;
 import com.shahid.aietest.models.AIETask;
-import com.shahid.aietest.ui.interfaces.TaskDelegate;
 import com.shahid.aietest.utills.DateUtills;
 
 import java.lang.ref.WeakReference;

@@ -1,4 +1,4 @@
-package com.shahid.aietest.ui.interfaces;
+package com.shahid.aietest.ui.tasks;
 
 
 // TaskDelegate to notify to implementing class for delete/update command

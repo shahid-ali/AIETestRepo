@@ -1,9 +1,11 @@
-package com.shahid.aietest.viewmodels;
+package com.shahid.aietest.utills;
 
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.shahid.aietest.AIEApplication;
+import com.shahid.aietest.ui.addtask.AddUpdateTaskViewModel;
+import com.shahid.aietest.ui.tasks.TasksViewModel;
 
 
 public class ViewModelFactory implements ViewModelProvider.Factory{

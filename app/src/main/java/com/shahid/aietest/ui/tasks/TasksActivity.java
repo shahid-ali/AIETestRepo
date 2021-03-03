@@ -1,11 +1,10 @@
-package com.shahid.aietest.ui.activities;
+package com.shahid.aietest.ui.tasks;
 
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.shahid.aietest.R;
-import com.shahid.aietest.ui.fragments.TasksFragment;
 
 public class TasksActivity extends AppCompatActivity {
 
@@ -18,5 +17,18 @@ public class TasksActivity extends AppCompatActivity {
                     .replace(R.id.container, TasksFragment.newInstance())
                     .commitNow();
         }
+    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+//        stopService(new Intent(getBaseContext(), ConnectivityService.class));
     }
 }

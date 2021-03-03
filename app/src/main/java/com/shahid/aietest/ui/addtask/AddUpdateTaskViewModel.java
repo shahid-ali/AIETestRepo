@@ -1,4 +1,6 @@
-package com.shahid.aietest.viewmodels;
+package com.shahid.aietest.ui.addtask;
+
+import android.util.Log;
 
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
@@ -20,6 +22,7 @@ public class AddUpdateTaskViewModel extends AndroidViewModel {
     private Calendar selectedCalendar;
     private int rowId=-10;
     private boolean isEditMode=false;
+    private LiveData<List<AIETask>> searchLD;
 
 
     public AddUpdateTaskViewModel (AIEApplication application) {
@@ -109,19 +112,29 @@ public class AddUpdateTaskViewModel extends AndroidViewModel {
     //search for existing task name to prevent duplicate task name
     public LiveData<List<AIETask>>  searchFor(String searchFor)
     {
-        return mRepository.searchFor(searchFor);
+        searchLD=mRepository.searchFor(searchFor);
+        return searchLD;
     }
 
-    public boolean isThisCurrentTask(AIETask aieTask)
+    //get search for removing observer
+    public LiveData<List<AIETask>> getSearchLD()
     {
-        if(rowId==aieTask.rowid)
+        return searchLD;
+    }
+
+    //check if this is current task that being edited
+    public boolean isThisCurrentTask(List<AIETask> aieTasks)
+    {
+        for(AIETask aieTask:aieTasks)
         {
-            return true;
+            Log.i(TAG,"isThisCurrentTask "+aieTask.taskName+"::"+aieTask.rowid+"::"+rowId);
+            //is its current task under edit , let it edit
+            if(rowId==aieTask.rowid)
+            {
+                return true;
+            }
         }
-        else
-        {
-            return false;
-        }
+        return false;
     }
 
 }

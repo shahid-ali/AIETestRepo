@@ -1,4 +1,4 @@
-package com.shahid.aietest.ui.activities;
+package com.shahid.aietest.ui.addtask;
 
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -6,7 +6,6 @@ import android.view.MenuItem;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.shahid.aietest.R;
-import com.shahid.aietest.ui.fragments.AddUpdateTaskFragment;
 
 public class AddUpdateTaskActivity extends AppCompatActivity {
 

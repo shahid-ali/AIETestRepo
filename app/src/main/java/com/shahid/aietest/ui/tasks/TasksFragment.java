@@ -1,4 +1,4 @@
-package com.shahid.aietest.ui.fragments;
+package com.shahid.aietest.ui.tasks;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,11 +19,8 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.shahid.aietest.AIEApplication;
 import com.shahid.aietest.R;
 import com.shahid.aietest.models.AIETask;
-import com.shahid.aietest.ui.activities.AddUpdateTaskActivity;
-import com.shahid.aietest.ui.adapters.TasksAdapter;
-import com.shahid.aietest.ui.interfaces.TaskDelegate;
-import com.shahid.aietest.viewmodels.TasksViewModel;
-import com.shahid.aietest.viewmodels.ViewModelFactory;
+import com.shahid.aietest.ui.addtask.AddUpdateTaskActivity;
+import com.shahid.aietest.utills.ViewModelFactory;
 
 import java.lang.ref.WeakReference;
 import java.util.List;

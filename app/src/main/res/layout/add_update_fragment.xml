@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="@dimen/common_horizontal_margin"
-    tools:context="com.shahid.aietest.ui.fragments.AddUpdateTaskFragment">
+    tools:context="com.shahid.aietest.ui.addtask.AddUpdateTaskFragment">
 
     <EditText
         android:id="@+id/task_name_et"

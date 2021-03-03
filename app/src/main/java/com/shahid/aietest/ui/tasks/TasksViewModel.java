@@ -1,4 +1,4 @@
-package com.shahid.aietest.viewmodels;
+package com.shahid.aietest.ui.tasks;
 
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;

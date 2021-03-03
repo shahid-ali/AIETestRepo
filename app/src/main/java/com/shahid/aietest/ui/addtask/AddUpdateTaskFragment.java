@@ -1,9 +1,10 @@
-package com.shahid.aietest.ui.fragments;
+package com.shahid.aietest.ui.addtask;
 
 import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -23,8 +24,7 @@ import com.shahid.aietest.AIEApplication;
 import com.shahid.aietest.R;
 import com.shahid.aietest.models.AIETask;
 import com.shahid.aietest.utills.DateUtills;
-import com.shahid.aietest.viewmodels.AddUpdateTaskViewModel;
-import com.shahid.aietest.viewmodels.ViewModelFactory;
+import com.shahid.aietest.utills.ViewModelFactory;
 
 import java.util.Calendar;
 import java.util.List;
@@ -139,49 +139,53 @@ public class AddUpdateTaskFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-
-                mViewModel.searchFor(s.toString()).observe(getViewLifecycleOwner(), new Observer<List<AIETask>>() {
-                    @Override
-                    public void onChanged(List<AIETask> aieTasks) {
-
-                        if(aieTasks != null && aieTasks.size() > 0)
-                        {
-                          for(AIETask aieTask:aieTasks)
-                          {
-                              //is its current task under edit , let it edit
-                              if(mViewModel.isThisCurrentTask(aieTask))
-                              {
-                                  addUpdateTaskButton.setEnabled(true);
-                                  addUpdateTaskButton.setClickable(true);
-                              }
-                              else //else show message and disbale submit button
-                              {
-                                  Toast.makeText(getActivity(),getString(R.string.dupilicate_task_warning),Toast.LENGTH_LONG).show();
-                                  addUpdateTaskButton.setEnabled(false);
-                                  addUpdateTaskButton.setClickable(false);
-                              }
-
-                          }
-                        }
-                        else
-                        {
-                            addUpdateTaskButton.setEnabled(true);
-                            addUpdateTaskButton.setClickable(true);
-                        }
-                    }
-                });
+                Log.i(TAG,"afterTextChanged "+s.toString());
             }
 
             @Override
             public void beforeTextChanged(CharSequence s, int start,
                                           int count, int after) {
+                Log.i(TAG,"beforeTextChanged "+s.toString());
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start,
                                       int before, int count) {
 
+                Log.i(TAG,"onTextChanged "+s.toString());
+                mViewModel.searchFor(s.toString()).observe(getViewLifecycleOwner(),duplicateTaskObserver);
             }
         });
     }
+
+    //duplicateTaskObserver
+    Observer<List<AIETask>> duplicateTaskObserver=new Observer<List<AIETask>>() {
+        @Override
+        public void onChanged(List<AIETask> aieTasks) {
+            Log.i(TAG,"observe "+aieTasks.size());
+
+            mViewModel.getSearchLD().removeObserver(this);
+
+            if(aieTasks != null && aieTasks.size() > 0)
+            {
+                //is its current task under edit , let it edit
+                if(mViewModel.isThisCurrentTask(aieTasks))
+                {
+                    addUpdateTaskButton.setEnabled(true);
+                    addUpdateTaskButton.setClickable(true);
+                }
+                else //else show message and disbale submit button
+                {
+                    Toast.makeText(getActivity(),getString(R.string.dupilicate_task_warning),Toast.LENGTH_SHORT).show();
+                    addUpdateTaskButton.setEnabled(false);
+                    addUpdateTaskButton.setClickable(false);
+                }
+            }
+            else
+            {
+                addUpdateTaskButton.setEnabled(true);
+                addUpdateTaskButton.setClickable(true);
+            }
+        }
+    };
 }
